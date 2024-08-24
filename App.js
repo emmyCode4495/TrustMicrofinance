@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react'
@@ -12,6 +12,8 @@ import  {useFonts} from "expo-font"
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react';
 import LoginErrorPage from './src/authentication/LoginErrorPage';
+import image from './assets/images/image';
+import MainTabs from './src/components/BottomTabs/MainTabsPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,7 +41,7 @@ export default function App() {
 
   return (
    <NavigationContainer>
-     <Stack.Navigator initialRouteName='loginerror'>
+     <Stack.Navigator initialRouteName='login'>
         <Stack.Screen name="login" component={LoginPage}
          options={{
            title:'',
@@ -52,7 +54,12 @@ export default function App() {
          }}
            
         />
-        <Stack.Screen name="home" component={HomePage}/>
+        <Stack.Screen name="home" component={HomePage}
+        options={{
+          title:'',
+        headerShown:false
+        }}
+        />
         <Stack.Screen name="loginerror" component={LoginErrorPage}
         options={{
             title:'',
@@ -64,6 +71,11 @@ export default function App() {
              )
         }}
         />
+         <Stack.Screen name="bottomTabs" component={MainTabs}
+        options={{
+           headerShown:false
+        }}
+        />
      </Stack.Navigator>
    </NavigationContainer>
 
@@ -73,12 +85,12 @@ export default function App() {
 const styles = StyleSheet.create({
     cancelView:{
         borderWidth:1,
+        borderRadius:15,
         paddingRight:23,
         paddingLeft:23,
         paddingTop:8,
         paddingBottom:8,
         marginTop:20,
-        borderRadius:10,
-        borderColor:colors.main
+        borderColor:colors.main,
     }
 })

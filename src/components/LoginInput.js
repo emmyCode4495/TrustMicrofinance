@@ -9,8 +9,21 @@ import { useNavigation } from '@react-navigation/native'
 const LoginInput = () => {
   // State to control visibility of password
   const [passwordVisible, setPasswordVisible] = useState(false)
+  const [password, setPassWord] = useState('')
+  const [error, setError] = useState(null)
 
   const navigation = useNavigation()
+
+  // Error handling
+  const handleLogin = async (e)=>{
+  
+  if(!password){
+    setError("Password is required")
+    return
+}
+
+    setError("")
+}
 
   const toggleShowPassword = () =>{
     setPasswordVisible(!passwordVisible)
@@ -20,9 +33,12 @@ const LoginInput = () => {
       <TextInput
         mode='outlined'
         label="Phone Number"
+        keyboardType='number-pad'
+  
         theme={{colors:{
             onSurfaceVariant: colors.black,
-            primary:colors.lightGrey
+            primary:colors.lightGrey,
+            error: "red"
         }}}
         style={{width:'95%', color:colors.lightGrey}}
       />
@@ -31,6 +47,8 @@ const LoginInput = () => {
               <TextInput
                   mode='outlined'
                   label="Your Password"
+                  value={password}
+                  onChange={(e)=>{setPassWord(e.target.value)}}
                   secureTextEntry={!passwordVisible}
                   theme={{colors:{
                     onSurfaceVariant: colors.black,
@@ -42,12 +60,12 @@ const LoginInput = () => {
                 <Ionicons
                 name={passwordVisible ? 'eye-outline':'eye-off-outline'}
                 size={25}
-
                 onPress={toggleShowPassword}
                 />
               </View>
           </View>
-          <TouchableOpacity onPress={()=>{navigation.navigate('loginerror')}}>
+          {error && <View><Text style={{color:"rgba(204, 0, 0, 1)"}}>{error}</Text></View>}
+          <TouchableOpacity onPress={()=>{handleLogin}}>
             <View style={styles.btnView}>
                 <Text style={{fontFamily:'Mulish', fontWeight:'bold', color:colors.white}}>
                     Login

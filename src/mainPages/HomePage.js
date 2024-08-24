@@ -1,17 +1,27 @@
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, Pressable, ScrollView } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+import colors from '../../constants/colors'
+import HomeHeader from '../components/HomeHeader'
+import HomePageCard from '../components/HomePageCard'
+import HomePageCardContent from '../components/HomePageCardContent'
+import HomeServices from '../components/HomeServices'
+import ServiceCardContent from '../components/ServicesCardContent'
+import TransactionsCardContent from '../components/TransactionsCardContent'
 
 const HomePage = () => {
     const navigation = useNavigation()
 
   return (
     <>
-   <Pressable onPress={()=>{navigation.navigate("login")}}>
-    <View>
-      <Text>HomePage</Text>
+    <View style={{flex:1,backgroundColor:colors.white}}>
+    <HomeHeader/>
+    <ScrollView>
+    <HomePageCardContent/>
+    <ServiceCardContent/>
+    <TransactionsCardContent/>
+    </ScrollView>
     </View>
-    </Pressable>
     </>
   )
 }

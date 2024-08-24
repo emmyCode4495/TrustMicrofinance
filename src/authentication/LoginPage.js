@@ -6,6 +6,7 @@ import LoginInput from '../components/LoginInput'
 
 const LoginPage = () => {
   return (
+    
     <KeyboardAvoidingView 
     behavior={Platform.OS === 'ios' ? 'paddding': 'height'} 
     style={{backgroundColor:colors.white, flex:1}}>
