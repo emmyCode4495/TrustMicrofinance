@@ -3,25 +3,23 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import colors from '../../constants/colors'
 import HomeHeader from '../components/HomeHeader'
-import HomePageCard from '../components/HomePageCard'
 import HomePageCardContent from '../components/HomePageCardContent'
-import HomeServices from '../components/HomeServices'
 import ServiceCardContent from '../components/ServicesCardContent'
 import TransactionsCardContent from '../components/TransactionsCardContent'
 
 const HomePage = () => {
-    const navigation = useNavigation()
+  const navigation = useNavigation()
 
   return (
     <>
-    <View style={{flex:1,backgroundColor:colors.white}}>
-    <HomeHeader/>
-    <ScrollView>
-    <HomePageCardContent/>
-    <ServiceCardContent/>
-    <TransactionsCardContent/>
-    </ScrollView>
-    </View>
+      <View style={{ flex: 1, backgroundColor: colors.white }}>
+        <HomeHeader />
+        <ScrollView>
+          <HomePageCardContent />
+          <ServiceCardContent />
+          <TransactionsCardContent />
+        </ScrollView>
+      </View>
     </>
   )
 }

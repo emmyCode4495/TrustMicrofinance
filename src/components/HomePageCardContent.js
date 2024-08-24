@@ -1,69 +1,78 @@
-import { View, Text, FlatList, Dimensions,Animated } from 'react-native'
-import React, { useRef, useState } from 'react'
+import { View, FlatList, Dimensions, Animated, Platform } from 'react-native'
+import React from 'react'
 import { accountDetailsData } from '../../constants/data/data'
 import HomePageCard from './HomePageCard'
-import Carousel from 'react-native-reanimated-carousel'
-import { ICarouselInstance } from "react-native-reanimated-carousel";
-import { ExpandingDot,LiquidLike } from 'react-native-animated-pagination-dots'
+import { SlidingDot } from 'react-native-animated-pagination-dots'
 import colors from '../../constants/colors'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
-const PAGE_WIDTH = window.width;
 
 const HomePageCardContent = () => {
-    const width = Dimensions.get('window').width;
-  return (
-    <GestureHandlerRootView style={{flex:1}}> 
+    const scrollX = React.useRef(new Animated.Value(0)).current
 
-    <Carousel
-        data={accountDetailsData}
-        loop
-        width={width }
-        autoPlay={false}
-        height={250}
-        scrollAnimationDuration={1000}
-        mode='circular'
-        keyExtractor={(item,index)=>index.toString()}
-        viewabilityConfig={{
-            itemVisiblePercentThreshold:100
-        }}
-        renderItem={({item,index})=>(
-            <View>
-                <HomePageCard
-                accountType={item.accountType}
-                accountBalance={item.accountBalance}
-                accountName={item.accountName}
-                accountNumber={item.accountNumber}
-               
-                />
-            </View>
-        )}
-        />
-        {/* <ExpandingDot
-        data={accountDetailsData}
-        expandingDotWidth={30}
-        scrollX={scrollX}
-        inActiveDotOpacity={0.6}
-        dotStyle={{
-            width:10,
-            height:10,
-            backgroundColor:colors.main,
-            borderRadius:5,
-            marginHorizontal:5
-        }}
-        containerStyle={{
-            top:30
-        }}
-        />
-        <LiquidLike
-        data={accountDetailsData}
-        scrollX={scrollX}
+    return (
+        <GestureHandlerRootView style={{ flex: 1 }}>
 
-        
-        /> */}
+            <FlatList
+                data={accountDetailsData}
+                horizontal
+                pagingEnabled
+                decelerationRate={'fast'}
+                showsHorizontalScrollIndicator={false}
+                onScroll={Animated.event(
+                    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                    {
+                        useNativeDriver: false
+                    }
+                )}
+                keyExtractor={(item, index) => index.toString()}
 
-    </GestureHandlerRootView>
-  )
+                renderItem={({ item, index }) => (
+                    <View>
+                        <HomePageCard
+                            accountType={item.accountType}
+                            accountBalance={item.accountBalance}
+                            accountName={item.accountName}
+                            accountNumber={item.accountNumber}
+                            image={item.image}
+                        />
+                    </View>
+                )}
+                contentContainerStyle={{
+                    marginLeft: Platform.OS === 'ios' ? 20 : -5,
+                    marginRight: Platform.OS === 'ios' ? 40 : 30
+                }}
+            />
+
+            {/* Pagination Dots */}
+            <SlidingDot
+                data={accountDetailsData}
+                expandingDotWidth={30}
+                scrollX={scrollX}
+                inActiveDotOpacity={0.6}
+                dotSize={9}
+                dotStyle={{
+                    backgroundColor: colors.lightGrey,
+                    opacity: 0.4
+                }}
+                containerStyle={{
+                    position: 'absolute',
+                    bottom: -30,
+                    flexDirection: 'row',
+                    alignSelf: 'center'
+                }}
+                slidingIndicatorStyle={{
+                    backgroundColor: colors.main,
+                    zIndex: 99,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    alignSelf: 'center'
+                }}
+            />
+            {/* Pagination Dots */}
+
+        </GestureHandlerRootView>
+    )
 }
 
 export default HomePageCardContent

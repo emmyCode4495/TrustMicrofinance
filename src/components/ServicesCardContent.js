@@ -1,20 +1,14 @@
-import { View, Text, FlatList, Dimensions, Animated, Image, Pressable, StyleSheet, Platform } from 'react-native'
-import React, { useRef, useState } from 'react'
-import { ServicesCardData, accountDetailsData } from '../../constants/data/data'
-import HomePageCard from './HomePageCard'
-import Carousel from 'react-native-reanimated-carousel'
-import { ExpandingDot, LiquidLike } from 'react-native-animated-pagination-dots'
+import { View, Text,Image, Pressable, StyleSheet, Platform } from 'react-native'
+import React from 'react'
 import colors from '../../constants/colors'
-import ServicesCard from './ServicesCard'
-import { FlatGrid, SimpleGrid } from 'react-native-super-grid'
-import { Entypo, Feather, FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { Feather, FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import image from '../../assets/images/image'
 
 
 const ServiceCardContent = () => {
     return (
         <>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginRight: 25, marginLeft: 25, marginTop: 35 }}>
+            <View style={styles.mainView}>
                 <View style={{ marginTop: 10 }}>
                     <Text style={{ color: colors.black, fontWeight: 'bold', fontSize: 20, fontFamily: 'Mulish' }}>Services</Text>
                 </View>
@@ -86,7 +80,7 @@ const ServiceCardContent = () => {
                 <View style={{ flexDirection: 'row' }}>
 
                     <View style={{ marginLeft: 25, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ backgroundColor: 'rgba(255, 242, 201, 1)', paddingRight: 20, paddingTop: 20, paddingBottom: 20, paddingLeft: 20, borderRadius: 10 }}>
+                        <View style={styles.moneyIconView}>
                             <Image
                                 source={image.moneybag}
                                 style={{ width: 30, height: 30 }}
@@ -122,7 +116,7 @@ const ServiceCardContent = () => {
                     </View>
 
                     <View style={{ marginLeft: 25, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ backgroundColor: 'rgba(191, 233, 213, 1)', paddingRight: 25, paddingTop: 20, paddingBottom: 20, paddingLeft: 25, borderRadius: 10,marginLeft:5 }}>
+                        <View style={styles.electricityView}>
                             <FontAwesome
                                 name="lightbulb-o"
                                 size={30}
@@ -155,6 +149,13 @@ const ServiceCardContent = () => {
 export default ServiceCardContent
 
 const styles = StyleSheet.create({
+    mainView:{
+         flexDirection: 'row', 
+         justifyContent: 'space-between', 
+         marginRight: 25, 
+         marginLeft: 25, 
+         marginTop: 35 
+    },
     firstRowCardView:{
      justifyContent: 'center', 
      alignItems: 'center', 
@@ -176,5 +177,22 @@ const styles = StyleSheet.create({
         paddingBottom: Platform.OS === 'ios'? 20:20,  
         paddingLeft: Platform.OS === 'ios'? 20:20, 
         borderRadius: 10 
+    },
+    moneyIconView:{ 
+        backgroundColor: 'rgba(255, 242, 201, 1)', 
+        paddingRight: 20, 
+        paddingTop: 20, 
+        paddingBottom: 20, 
+        paddingLeft: 20, 
+        borderRadius: 10 
+    },
+    electricityView:{
+        backgroundColor: 'rgba(191, 233, 213, 1)', 
+        paddingRight: 25, 
+        paddingTop: 20, 
+        paddingBottom: 20, 
+        paddingLeft: 25, 
+        borderRadius: 10,
+        marginLeft:5 
     }
 })

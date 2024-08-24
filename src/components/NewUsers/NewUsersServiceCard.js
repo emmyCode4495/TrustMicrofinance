@@ -12,9 +12,9 @@ import image from '../../../assets/images/image'
 const NewUsersServiceCard = () => {
     return (
         <>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginRight:Platform.OS === 'ios'?25:25, marginLeft: 25, marginTop: 20 }}>
+            <View style={styles.mainView}>
                 <View style={{ marginTop: 10 }}>
-                    <Text style={{ color: colors.black, fontWeight: 'bold', fontSize: 20, fontFamily: 'Mulish' }}>Services</Text>
+                    <Text style={styles.servicesTextStyle}>Services</Text>
                 </View>
                 <Pressable>
                     <View style={{ backgroundColor: "rgba(32, 130, 32, 0.1)", marginTop: 5, padding: 10, borderRadius: 10 }}>
@@ -22,7 +22,7 @@ const NewUsersServiceCard = () => {
                     </View>
                 </Pressable>
             </View>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30, marginRight:Platform.OS === 'ios'?25:30 }}>
+            <View style={styles.sendMoneyView}>
                 <View style={{ flexDirection: 'row' }}>
 
                     <View style={{ marginLeft: 25, justifyContent: 'center', alignItems: 'center' }}>
@@ -76,7 +76,7 @@ const NewUsersServiceCard = () => {
                 </View>
             </View>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginRight: 25, marginLeft: 25, marginTop:Platform.OS === 'ios'?30:25 }}>
+            <View style={styles.thingsToDoContainer}>
                 <View style={{ marginTop: 10 }}>
                     <Text style={{ color: colors.black, fontWeight: 'bold', fontSize: 25, fontFamily: 'Mulish' }}>Things to do</Text>
                 </View>
@@ -95,6 +95,13 @@ const NewUsersServiceCard = () => {
 export default NewUsersServiceCard
 
 const styles = StyleSheet.create({
+    mainView:{
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        marginRight:Platform.OS === 'ios'?25:25, 
+        marginLeft: 25, 
+        marginTop: 20 
+    },
     iconStyleView:{ 
         backgroundColor: 'rgba(214, 250, 209, 1)', 
         paddingRight: Platform.OS === 'ios'? 20:20, 
@@ -102,5 +109,24 @@ const styles = StyleSheet.create({
         paddingBottom: Platform.OS === 'ios'? 20:20,  
         paddingLeft: Platform.OS === 'ios'? 20:20, 
         borderRadius: 10 
+    },
+    thingsToDoContainer:{
+         flexDirection: 'row', 
+         justifyContent: 'space-between', 
+         marginRight: 25, 
+         marginLeft: 25,
+          marginTop:Platform.OS === 'ios'?30:25 
+    },
+    sendMoneyView:{
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        marginTop: 30, 
+        marginRight:Platform.OS === 'ios'?25:30 
+    },
+    servicesTextStyle:{
+        color: colors.black, 
+        fontWeight: 'bold', 
+        fontSize: 20, 
+        fontFamily: 'Mulish' 
     }
 })

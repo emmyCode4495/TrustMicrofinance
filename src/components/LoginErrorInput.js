@@ -1,49 +1,79 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import {TextInput} from 'react-native-paper'
+import { TextInput } from 'react-native-paper'
 import colors from '../../constants/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 
 
 const LoginErrorInput = () => {
+
   // State to control visibility of password
   const [passwordVisible, setPasswordVisible] = useState(false)
 
+ // States for form error check
+  const [password, setPassword] = useState('')
+  const [passwordError, setPasswordError] = useState("")
+
+
+// Form errror validation logic
+  const handleSubmit = () => {
+    var passwordValid = false;
+    if (password.length == 0) {
+      setPasswordError("Password is required")
+    } else if (password.length < 6) {
+      setPasswordError("Paasword must have a minimum of 6 characters")
+    } else {
+      setPasswordError('')
+      passwordValid = true
+    }
+
+    if (passwordValid) {
+      navigation.navigate('bottomTabs')
+    }
+  }
+
+
   const navigation = useNavigation()
 
-  const toggleShowPassword = () =>{
+  // Show and hide passworrd
+  const toggleShowPassword = () => {
     setPasswordVisible(!passwordVisible)
   }
   return (
     <View style={styles.container}>
-          <View style={{marginTop:25}}>
-            
-              <TextInput
-                  mode='outlined'
-                  label="Your Password"
-                  secureTextEntry={!passwordVisible}
-                  theme={{colors:{
-                    onSurfaceVariant: colors.black,
-                    primary:colors.lightGrey
-                }}}
-                  style={{ width: '95%', color: colors.lightGrey }}
-              />
-              <View style={{justifyContent:'flex-end', alignItems:'flex-end', marginRight:35, marginTop:-35}}>
-                <Ionicons
-                name={passwordVisible ? 'eye-outline':'eye-off-outline'}
-                size={25}
-                onPress={toggleShowPassword}
-                />
-              </View>
-          </View>
-          <TouchableOpacity onPress={()=>{navigation.navigate('loginerror')}}>
-            <View style={styles.btnView}>
-                <Text style={{fontFamily:'Mulish', fontWeight:'bold', color:colors.white}}>
-                    Login
-                </Text>
-            </View>
-          </TouchableOpacity>
+      <View style={{ marginTop: 25 }}>
+
+        <TextInput
+          mode='outlined'
+          label="Your Password"
+          secureTextEntry={!passwordVisible}
+          value={password}
+          onChangeText={text => setPassword(text)}
+          theme={{
+            colors: {
+              onSurfaceVariant: colors.black,
+              primary: colors.lightGrey
+            }
+          }}
+          style={{ width: '95%', color: colors.lightGrey }}
+        />
+        <View style={{ justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 35, marginTop: -35 }}>
+          <Ionicons
+            name={passwordVisible ? 'eye-outline' : 'eye-off-outline'}
+            size={25}
+            onPress={toggleShowPassword}
+          />
+        </View>
+      </View>
+      {passwordError.length > 0 && <View style={{ marginTop: 10, marginLeft: 3 }}><Text style={{ color: "rgba(204, 0, 0, 1)", fontFamily: 'Rubik' }}>{passwordError}</Text></View>}
+      <TouchableOpacity onPress={handleSubmit}>
+        <View style={styles.btnView}>
+          <Text style={{ fontFamily: 'Mulish', fontWeight: 'bold', color: colors.white }}>
+            Login
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -51,21 +81,21 @@ const LoginErrorInput = () => {
 export default LoginErrorInput
 
 const styles = StyleSheet.create({
-    container: {
-        // flex:1,
-        marginLeft:12,
-        marginTop:30
-    },
-  btnView:{
-    borderWidth:1,
-    padding:17,
-    marginTop:40,
-    marginRight:35,
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:10,
-    backgroundColor:colors.main,
-    borderColor:colors.white,
-    width:"95%"
+  container: {
+    // flex:1,
+    marginLeft: 12,
+    marginTop: 30
+  },
+  btnView: {
+    borderWidth: 1,
+    padding: 17,
+    marginTop: 40,
+    marginRight: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    backgroundColor: colors.main,
+    borderColor: colors.white,
+    width: "95%"
   }
-  });
+});

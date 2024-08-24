@@ -2,7 +2,8 @@ import { View, Text,
   ToastAndroid, // For Android-specific toast message
   AlertIOS,     // For iOS-specific alert message
   Platform,      // To handle cross-platform differences
-  Pressable
+  Pressable,
+  ImageBackground
 } from 'react-native'
 
 import  Clipboard from '@react-native-clipboard/clipboard'
@@ -14,7 +15,8 @@ const HomePageCard = ({
     accountType,
     accountBalance,
     accountName,
-    accountNumber
+    accountNumber,
+    image
 }) => {
 
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -50,7 +52,13 @@ const HomePageCard = ({
   }
 
   return (
-    <View style={{backgroundColor:'rgba(32, 130, 32, 1),rgba(197, 201, 222, 0.2)', marginTop:30,padding:30,marginRight:20, marginLeft:20, borderRadius:15}}>
+    
+      <ImageBackground
+      source={{uri:image}}
+      resizeMode='cover'
+      borderRadius={10}
+      style={{width:360, height:190, marginLeft:20, marginTop:30, paddingRight:10, paddingLeft:10, paddingTop:20}}
+      >         
       <View style={{marginBottom:15}}>
         <Text style={{fontSize:15, fontFamily:'Mulish', color:colors.white}}>{accountType}</Text>
       </View>
@@ -107,7 +115,9 @@ const HomePageCard = ({
       </View>
       </View>
       </View>
-    </View>
+      </ImageBackground>
+   
+   
   )
 }
 

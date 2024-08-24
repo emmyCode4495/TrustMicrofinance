@@ -1,14 +1,14 @@
-import { View, Text, Image, Platform } from 'react-native'
+import { View, Text, Image, Platform, StyleSheet } from 'react-native'
 import React from 'react'
 import image from '../../assets/images/image'
-import { AntDesign, Entypo, FontAwesome, FontAwesome5, FontAwesome6, Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
-import colors from '../../constants/colors'
+import { AntDesign, Entypo,MaterialCommunityIcons} from '@expo/vector-icons'
+
 
 const HomeHeader = () => {
   return (
     <View>
 
-        <View style={{flexDirection:'row', marginTop:Platform.OS === 'ios' ?"18%":"2%" , justifyContent:'space-between', marginRight:12}}>
+        <View style={styles.mainView}>
         <View style={{flexDirection:'row'}}>
 
     <View>
@@ -19,7 +19,7 @@ const HomeHeader = () => {
       />
       </View>
 
-      <View style={{alignItems:'center',justifyContent:'center',marginTop:-50,marginLeft:48,backgroundColor:"gold", borderRadius:50, width:20, height:20}}>
+      <View style={styles.ratingView}>
         <View style={{flexDirection:'row'}}>
         <View style={{marginTop:1}}>
         <Entypo
@@ -66,3 +66,22 @@ const HomeHeader = () => {
 }
 
 export default HomeHeader
+
+const styles = StyleSheet.create({
+  ratingView:{
+    alignItems:'center',
+    justifyContent:'center',
+    marginTop:-50,
+    marginLeft:48,
+    backgroundColor:"gold", 
+    borderRadius:50, 
+    width:20, 
+    height:20
+  },
+  mainView:{
+    flexDirection:'row', 
+    marginTop:Platform.OS === 'ios' ?"18%":"2%" , 
+    justifyContent:'space-between', 
+    marginRight:12
+  }
+})
